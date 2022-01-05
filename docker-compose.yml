@@ -1,0 +1,27 @@
+version: "2.0"
+services:
+  results:
+      image: node_results
+      restart: always
+      build: ./node_results
+      ports:
+        - 3001:3001
+      volumes:
+        - ./node_results:/node_results
+  admin:
+    image: node_admin
+    restart: always
+    build: ./node_admin
+    ports:
+      - 3000:3000
+    volumes:
+      - ./node_admin:/node_admin
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+  mongodb:
+

@@ -1,0 +1,17 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Samuel Rodriguez-Lozano",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.4"
+  }
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter image</title>
+  <style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100);
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: black;
+}
+
+.containerInput {
+  color: white;
+  font-family: Roboto;
+  width: 100%;
+  margin: 30px 0px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerAdd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+input {
+  width: 200px;
+}
+
+.container {
+  margin: 30px 10% 30px 10%;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.itemContainer{
+  margin: 20px;
+  position: relative;
+}
+
+.image {
+  width:  400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.itemContainer:hover {
+  cursor: pointer;
+}
+
+.itemContainer:hover > .imageOverlay { 
+    opacity: 1;
+}
+
+.itemContainer:hover > .image { 
+    filter: blur(1px);
+}
+
+.imageOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: all 300ms ease-out;
+    font-family: Roboto;
+    padding-left: 20px;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="containerInput">
+    <form method="post" action="/photo/add" class="form">
+      <div class="containerAdd">
+        <label for="url">URL :</label>
+        <input type="text" name="url">
+      </div>
+      <div class="containerAdd">
+        <label for="titre">Titre :</label>
+        <input type="text" name="titre">
+      </div>
+      <div class="containerAdd">
+         <input type="submit" value="Ajouter">
+      </div>
+  </form>
+</div>
+
+<div class="container">
+  <% photos.forEach(function(photo) { %>
+    <div class="itemContainer">
+      <img class="image" src="<%= photo.url %>" alt="alt">
+      <div class="imageOverlay">
+         <div><%= photo.titre %></div>
+      </div>
+    </div>
+  <% }); %>
+</div>
+  
+</body>
+</html>

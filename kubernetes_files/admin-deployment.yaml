@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: admin
+  name: admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: admin-app-pod
+      type: frontend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: admin-app-pod
+        type: frontend
+    spec:
+      containers:
+        - image: samuel3105/node_admin
+          name: admin
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - mountPath: /node_admin
+              name: admin-claim0
+      restartPolicy: Always
+      volumes:
+        - name: admin-claim0
+          persistentVolumeClaim:
+            claimName: admin-claim0

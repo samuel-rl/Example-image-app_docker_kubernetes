@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongo
+  name: mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mongo-app-pod
+      type: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: mongo-app-pod
+        type: backend
+    spec:
+      containers:
+        - image: mongo
+          name: mongo
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb
+      restartPolicy: Always
+      volumes:
+        - name: mongodb
+          persistentVolumeClaim:
+            claimName: mongodb
